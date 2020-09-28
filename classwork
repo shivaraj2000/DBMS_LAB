@@ -1,0 +1,37 @@
+**Schema (MySQL v5.7)**
+
+    create table STUDENT(SSN integer,Name varchar(20),Major varchar(10),Bdate Date,primary key(SSN));
+    create table COURSE(Courseno integer,Cname varchar(20),Dept varchar(10),primary key(Courseno));
+    create table TEXT1(Book_ISBN integer,Book_Title varchar(20),Publisher varchar(20),Author varchar(20),primary key(Book_ISBN));                
+    create table BOOK_ADOPTION(Courseno integer,Quarter integer,Book_ISBN integer,primary key(Courseno,Quarter),foreign key(Courseno) references COURSE(Courseno),foreign key(Book_ISBN) references TEXT1(Book_ISBN));
+    create table ENROLL(SSN integer,Courseno integer,Quarter integer,Grade varchar(10),primary key(SSN,Courseno,Quarter),foreign key(SSN) references STUDENT(SSN),foreign key(Courseno,Quarter) references BOOK_ADOPTION(Courseno,Quarter));      
+    insert into STUDENT values(101,'RAMA','CS','2012-06-01'); 
+    insert into STUDENT values(102,'SHAMA','ME','2015-02-09');                                            
+    insert into STUDENT values(103,'BHAMA','EC','2018-06-06');                                     
+    insert into STUDENT values(104,'BHIMA','IS','2015-01-10');                                            
+    insert into STUDENT values(105,'NAVEEN','EC','2019-03-03');  
+    insert into COURSE values(15,'SE','CSE');
+    insert into COURSE values(16,'','ECE');
+    insert into COURSE values(17,'CNS','ISE');
+    insert into COURSE values(18,'ATC','CSE');
+    insert into COURSE values(19,'DBMS','ME');
+    insert into TEXT1 values(10001,'ENG','ABC','DDD');
+    insert into TEXT1 values(10002,'HINDI','ABD','EEE');
+    insert into TEXT1 values(10003,'MECH','ABE','CCC');
+    insert into TEXT1 values(10004,'ALG','ABF','AAA');
+    insert into TEXT1 values(10005,'CV','ABG','BBB');
+    insert into BOOK_ADOPTION values(15,1,10005);
+    insert into BOOK_ADOPTION values(16,2,10002);
+    insert into BOOK_ADOPTION values(17,3,10001);
+    insert into BOOK_ADOPTION values(18,4,10005);
+    insert into BOOK_ADOPTION values(19,5,10004);
+    insert into ENROLL values(103,17,3,'A');
+    insert into ENROLL values(104,15,1,'E');
+    insert into ENROLL values(102,16,2,'B');
+    insert into ENROLL values(101,19,5,'C');
+    insert into ENROLL values(104,18,4,'D');
+
+---
+
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/hjHnTNadtv8qYzoX4LQh1M/0)
